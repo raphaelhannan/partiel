@@ -11,7 +11,7 @@ Il faut télécharger le dossier SITE sur la branche master et ouvrir la page in
 Une fois installé il faut dezippé le dossier!!
 
 ## Création du git
-J'ai utilisé les commande cd puis le git init/ git add/ git commit -m "first commit"/ git remote add origin git@github.com:raphaelhannan/partiel.git/ git push
+J'ai utilisé à travers l'invité de commande Powershell les commande cd puis le git init/ git add/ git commit -m "first commit"/ git remote add origin git@github.com:raphaelhannan/partiel.git/ git push
 
 
 
