@@ -1,0 +1,29 @@
+$white25 : rgba(255, 255, 255, 0.25);
+$white05 : rgba(255, 255, 255, 0.05);
+
+$lightgrey : #f3f3f3;
+$darkgrey : #a0a1a7;
+$salmon : #e97770;
+$marine : #2f333b;
+
+$icon : #3d4249;
+$white100: white;
+
+@font-face{
+    font-family: "SourceSans" ;
+    src: url("../webfonts/SourceSansPro-Regular.woff") format("woff"),
+        url("../webfonts/SourceSansPro-Regular.woff2") format("woff2");
+        font-weight: normal;
+}
+@font-face{
+    font-family: "SourceSans" ;
+    src: url("../webfonts/SourceSansPro-Light.woff") format("woff"),
+        url("../webfonts/SourceSansPro-Light.woff2") format("woff2");
+        font-weight: 300;
+}
+@font-face{
+    font-family: "SourceSans" ;
+    src: url("../webfonts/SourceSansPro-SemiBold.woff") format("woff"),
+        url("../webfonts/SourceSansPro-SemiBold.woff2") format("woff2");
+        font-weight: bold;
+}

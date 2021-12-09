@@ -1,0 +1,655 @@
+//Fichier 
+
+@import "reset";
+@import "variables";
+@mixin shadow($side) { // mixin sert à definir la fonction que l'on va utilisé ici shadow
+    content: '';
+    display: block; //mettre les carré rouge à coté des h1
+    width: 35px;
+    height: 38px;
+    background:url(../images/shadow.png);
+    position: absolute;
+    bottom: -23px;
+    #{$side} : 100%; /* ON sait que side vaut 'left' ou 'right' et on utilise cette valeur en tant que nom de proprieté : le but est d'avoir left : 100% OU right : 100% */
+    @if $side == 'left'{
+        transform: scaleX(-1); 
+    }
+
+}
+
+//a { href ^= https} viser tous les liens externes au site tous ce qui commence par https par exemple {class^= col-] tt les class qui commence par col
+//a { href *= https} viser tout ce qui contient https
+//a { href $= https} viser tout ce qui fini par https
+@mixin button($type, $backcolor : $salmon, $txtcolor : $white100) {
+    text-decoration: none;
+    text-transform: uppercase;
+    border:none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    padding: 1rem 3rem; // a defini la taille du bouton du carré qui de base était collé au mot
+    display: inline-block; // permet de retrecir le background au block lui meme
+    border-radius: 5px;
+    background: transparent;
+    color: $txtcolor;
+    margin-right: 1rem;
+    
+    @if $type == 'full'{
+        background: $backcolor;
+    }
+    @if $type == 'border'{
+        box-shadow: inset 0 0 2px $darkgrey;
+    }
+}
+@mixin title{
+	color: $salmon;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	font-size: 1.2rem;
+	letter-spacing: 1px;
+}
+@mixin iconslist($c : $darkgrey){
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	li{
+		width: 40%;
+		margin-right: 4rem;
+		border-bottom: 1px solid $c;
+		padding: 2rem 1rem 2rem 4rem;
+		position: relative;
+		&:nth-child(even){
+			margin-right: 0;
+		}
+		&:nth-last-of-type(1),
+		&:nth-last-of-type(2){
+		border-bottom: none;
+		}
+		i{
+			position: absolute;
+			top: 1.5rem;
+			left: 0;
+			display: flex;
+			width: 3rem;
+			height: 3rem;
+			background: $icon;
+			color: $white100;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+		}
+		h1{
+			@include title;
+		}
+		p{
+			margin-bottom: 0;
+		}
+		a{
+			color:$white100;
+		}
+	}
+}
+@mixin nav($c : $white25){
+	border: 1px solid $c;
+	padding: 20px;
+
+	border-radius: 5px;
+	a{
+		margin-right: 20px;
+
+		&:last-child{
+			margin-right: 0;
+		}
+	}
+}
+@mixin below($size){
+    @media screen {
+        
+    }
+}
+
+
+
+
+
+html {
+    font-family: "SourceSans" ;
+    font-size: 15px;
+
+}
+a.button,
+button{
+    &.full{
+        @include button('full');
+    }
+    &.line{
+        @include button('line');
+    }
+    &:last-child{
+        margin-right: 0%;
+    }
+}
+a{
+    text-decoration: none; //enlever le soulignement des liens
+    color: inherit; //enlever la couleur bleu des liens afin qu'ils prennent la couleur qu'on leurs à donner
+}
+.zone{
+    position: relative; // definir au quel cadre apatiens le h1
+   & > h1:first-child{ // on parle au 1er H1 de chaque sections zone
+        position: absolute; // le sortir du block
+        top: -40px;
+        color: white;
+        background: inherit;
+        width: 300px; //agrandir le cadre
+        left: calc(50% - 150px);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+       &::before{
+@include shadow('left');
+       }
+       &::after{
+        @include shadow('right');
+       }
+        
+    
+        
+        
+
+    }
+    .wrapper{
+        width: 90%;
+        max-width: 1200px;
+        margin:auto;
+        padding: 100px 0;
+        
+    }
+    h2, h3, p, ul{
+        margin-bottom: 30px;    
+    }
+    strong{
+        font-weight: bold; // au balise strong qu'on a mis dans le html
+    }
+    p a{
+        text-decoration: underline;
+    }
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header{
+    background-color: #E0E0E0  no repeat 50% 50%/*ne pas repeter l'image*/;
+    background-size: cover; //preciser l'espace qu'il couvre cover couvre tt l'espace
+    display: flex; flex-direction: column;//mettre en colonne 
+    background-color: #E0E0E0;
+   
+    align-items: center;
+    text-transform: uppercase; // mettre tout en majuscule
+    
+    h1{
+   
+        justify-content: center;
+
+        color: black;
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 8px;
+        margin-bottom: 20px;
+        
+               
+        
+    }
+    h2{
+   
+        color: $white25;
+        letter-spacing: 2px;
+        font-weight: 300;
+
+     
+    }
+    nav{
+width: 100%;
+        position: absolute;
+      background-color: #29333D;
+        color: white;
+        left: 50%; // Se baser sur la moitié de la largeur de la page
+        border: 3px solid white; //encadrer la nav
+        padding: -80px; //repouser l'encadrement 
+        transform: translate(-50%); // mettre le milieu du block au millieu de la page 
+        border-radius: 5px; //mettre les coin de l'encadrement arrondi
+        .recherche{
+   
+            width: 30%;
+            height: 50px;
+align-items: center;
+border: 1px solid black;
+
+background: var(#D1D8E0);
+
+color: var(#D1D8E0);
+
+
+
+
+
+}
+
+        a{
+            font-size: 150%;
+            padding: 64px;
+            top: 30px;
+            margin-right: 20px;
+            &:last-child{
+                margin-right: 0%;
+                
+            }
+     
+        }
+        .panier{
+            width: 100px;
+          
+          
+            ;
+
+        }
+        }
+        
+    }
+    .form {
+        background: gainsboro;
+        font-family: Montserrat, "sans-serif";
+        display: flex;
+        justify-content: center;
+        color: #303030;
+    
+       
+        .contactez-nous {
+        width: 700px;
+        border: 1px solid;
+        border-radius: 8px;
+        padding: 0 50px 0 50px;
+        background: white;
+        }
+        
+        .contactez-nous > h1 {
+        font-weight: 500;
+        }
+        
+        .contactez-nous > p {
+        font-weight: 300;
+        }
+        
+        form div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 83px;
+        margin-top: 25px;
+        }
+        
+        form div > label {
+        margin-bottom: 7px;
+        font-weight: 600;
+        }
+        
+        form div > input, form div > select, form div > textarea {
+        background: #C3C2C2;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: Montserrat, "sans-serif";
+        box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+        }
+        
+        form div > input, form div > select {
+        height: 50px;
+        padding-left: 10px;
+        }
+        
+        form div > select {
+        appearance: none;
+        background-size: 15px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDIxMy4zMzMgMjEzLjMzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cG9seWdvbiBwb2ludHM9IjAsNTMuMzMzIDEwNi42NjcsMTYwIDIxMy4zMzMsNTMuMzMzICAgIiBmaWxsPSIjMzAzMDMwIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BvbHlnb24+Cgk8L2c+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPC9nPjwvc3ZnPg==');
+        background-position: right 10px top 50%;
+        background-repeat: no-repeat;
+        }
+        
+        form div > textarea {
+        height: 195px;
+        padding: 15px 0px 0px 10px;
+        }
+        
+        form div > input::placeholder, form div > textarea::placeholder {
+        color: white;
+        }
+        
+        form div > select:invalid {
+        color: white;
+        }
+        
+        form div > select option {
+        background: white;
+        color: #303030;
+        }
+        
+        form div:last-child {
+        align-items:center;
+        margin-top: 20px;
+        }
+        
+        form button {
+        width: 450px;
+        max-width: 500px;
+        height: 60px;
+        font-weight: 700;
+        font-size: 28px;
+        background: white;
+        border: rgba(48, 48, 48, 0.5) solid 1px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+        color: #303030;
+        }
+    }
+        .vente{
+            margin-top: 120px;
+            width: 100%;
+        }
+        
+        .banner{
+            margin-top: 120px;
+            width: 100%;
+        }
+        .logo{
+            width: 15%;
+        }
+        .cta{
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+        }
+        
+        
+        .endorsements{
+            background: $lightgrey;
+         
+            nav{
+                width: 100%;
+                height: 2%;
+                
+                position: absolute;
+                background-color: #29333D;
+                color: white;
+                left: 50%; // Se baser sur la moitié de la largeur de la page
+                border: 3px solid white; //encadrer la nav
+                padding: -80px; //repouser l'encadrement 
+                transform: translate(-50%); // mettre le milieu du block au millieu de la page 
+                border-radius: 5px; //mettre les coin de l'encadrement arrondi
+                
+                a{
+                    border: 1px solid white ;
+                    position: relative;
+                    font-size: 150%;
+                    padding-left: 64px;
+                    padding-right: 64px;
+                    text-align: center;
+                    margin-right: 20px;
+                    top: 20px;
+                    left: 80px;
+                    
+                    
+                    
+                }
+                .recherche{
+                    
+                    width: 30%;
+                    height: 50px;
+                    align-items: center;
+                    border: 1px solid black;
+                    
+                    background: var(#D1D8E0);
+                    
+                    color: var(#D1D8E0);
+                    
+                    
+                    
+                    
+                    
+                }
+                
+            }
+            .wrapper{
+                display: flex;
+                float: 20px;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 100px;
+                text-align: center;
+                
+            }
+    article{
+        width: 30%;
+        float: left;
+display: flex;
+    flex-direction: column;
+    column-count: 3;
+    letter-spacing: 2px;
+    margin-left: 30px;
+    figure{
+        order: -1;
+        border: 10px solid white;
+    }
+    h1{
+        color: $salmon;
+        font-size: 1.2rem;
+        font-weight: bold;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+justify-content: center;
+
+
+    }
+    p{
+        padding-top: 40px;
+        color: $darkgrey;
+        text-align: center;
+    }
+        
+
+        
+    }
+    
+}
+footer.zone{
+	background: $marine;
+	color: $white25;
+	.wrapper{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.baseline{
+			text-align: center;
+			font-size:1.5rem;
+
+		}
+		.focus{
+			color: $white100;
+			text-align: center;
+			font-size:2rem;
+		}
+		article{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			border-top: 1px solid $white05;
+			border-bottom: 1px solid $white05;
+			padding: 2rem;
+			margin-bottom: 30px;
+			form{
+				width: 45%;
+            
+				padding-top: 2rem;
+				p:first-child{
+					display: flex;
+				justify-content: space-between;
+				}
+				input, textarea{
+					font-family: inherit;
+					background: $darkgrey;
+					margin: 0;
+					padding: 1rem;
+					border: none;
+					border-radius: 5px;
+				}
+				input{
+					width: 49%;
+				}
+				textarea{
+					width: 100%;
+					resize: vertical;
+				}
+			}
+			ul{
+				width: 45%;
+				@include iconslist($white05);
+			}
+		}
+
+		& > ul{
+			@include nav($white05);
+			width: fit-content;
+			margin:auto;
+			display: flex ;
+			li{
+				border-right: 1px solid $white05;
+				padding: 0 1rem;
+				&:last-child{
+					border-right: none;
+				}
+				a{
+					text-decoration: underline;
+				}
+            }
+        }
+        
+    }
+}
+
+
+@media  screen and ( max-width:  1200px){           //adapter la version ordinateur à des écrans plus petits ici change à partir de 1200px
+    footer{
+article{   flex-direction: column;
+    display: flex;
+ ul{                                 // min afin que les éléements ne parte pas dans tout les sens
+   
+    min-width: 100%; 
+    border: 1px solid grey;
+    
+ li{
+    width: 100%;                
+    margin: 0;
+  }
+
+}
+    form{
+        min-width: 100%;
+    }
+
+}
+}
+}
+@media  screen and ( max-width:  1000px){
+    .full, .line{
+           width: 100%;
+           height: 100%;
+       
+       
+    } 
+    header{
+        nav{
+          
+        }
+    }
+.endorsements{                         //mettre la partie endorsement en colonne 
+                 
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        article{
+        width: 100%;
+            }
+            }
+    
+}    footer{
+    article{   flex-direction: column;
+        display: flex;
+       
+     ul{                                 
+       flex-direction: column;
+        min-width: 100%; 
+        border: 1px solid grey;
+        
+        
+        
+     li{
+        width: 100%;                
+        margin: 0;
+        margin-left: 20rem;
+        
+      }
+    
+    }
+        form{
+            min-width: 100%;
+            p:first-child{
+                flex-direction: column;
+                flex-wrap: wrap;
+                display: flex;
+                
+            
+            
+        
+                
+            }
+           
+        }
+    
+    }
+    }
+
+
+.details{
+        ul{
+            display: flex;
+            flex-direction: column;
+            li{
+            width: 100%;
+}
+    } 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
